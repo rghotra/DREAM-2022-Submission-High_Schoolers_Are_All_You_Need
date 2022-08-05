@@ -464,14 +464,14 @@ model.compile(optimizer=opt, loss=loss_func, metrics=[])
 # In[ ]:
 
 
-# If training in more than one run
-
-model = tf.keras.models.load_model('model_location-h5', custom_objects={
+# If training in more than one run -----------------------------------------------------------
+model = tf.keras.models.load_model('../model.h5', custom_objects={
     'ProfileModel' : ProfileModel,
     'MultiHeadAttention2' : MultiHeadAttention2,
     'RevCompConv1D' : RevCompConv1D,
     'AttentionPooling' : AttentionPooling
     })
+# --------------------------------------------------------------------------------------------
 
 
 # In[ ]:
@@ -494,7 +494,7 @@ for i in range(750):
         ls = tf.keras.losses.MSE(y_pred, y_valid).numpy()
         
         if pr >= np.max(prs) - 1e-7:
-            model.save(f'/content/drive/MyDrive/Colab Notebooks/DREAM/models/{wb.run.name}_3.h5')
+            model.save('../model.h5')
             
         prs.append(pr)
         
@@ -530,7 +530,7 @@ for i in range(750, 1250):
         ls = tf.keras.losses.MSE(y_pred, y_valid).numpy()
         
         if pr >= np.max(prs) - 1e-7:
-            model.save(f'/content/drive/MyDrive/Colab Notebooks/DREAM/models/{wb.run.name}_3.h5')
+            model.save('../model.h5')
             
         prs.append(pr)
         
