@@ -493,10 +493,10 @@ for i in range(750):
         sr = stats.spearmanr(y_pred, y_valid)[0]
         ls = tf.keras.losses.MSE(y_pred, y_valid).numpy()
         
+        prs.append(pr)
+        
         if pr >= np.max(prs) - 1e-7:
             model.save('../model.h5')
-            
-        prs.append(pr)
         
         print('pearson r:', pr)
         print('spearman r:', sr)
@@ -529,10 +529,10 @@ for i in range(750, 1250):
         sr = stats.spearmanr(y_pred, y_valid)[0]
         ls = tf.keras.losses.MSE(y_pred, y_valid).numpy()
         
+        prs.append(pr)
+        
         if pr >= np.max(prs) - 1e-7:
             model.save('../model.h5')
-            
-        prs.append(pr)
         
         print('pearson r:', pr)
         print('spearman r:', sr)
