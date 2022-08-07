@@ -5,6 +5,7 @@ import h5py
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import quantile_transform
 
 class RevCompConv1D(tf.keras.layers.Conv1D):
     """
@@ -361,8 +362,10 @@ with h5py.File('../Training Data/compressed_dataset_111.h5', 'r') as hf:
 
 
 
-preds = np.squeeze(model.predict(x_test, batch_size=100))
+preds = np.squeeze(model.predict(x_test, batch_size=1000))
 uniform_preds = quantile_transform(np.expand_dims(preds, axis=1))
+
+print('made predictions')
 
 
 
@@ -378,6 +381,8 @@ testing_seqs = np.array(seqs)
 
 export_preds = np.array([testing_seqs, np.squeeze(uniform_preds)]).transpose()
 export_preds = pd.DataFrame(export_preds)
+
+print('exporting now')
 
 export_preds.to_csv('../test_predictions.txt', index=False, header=False, sep='\t')
 
