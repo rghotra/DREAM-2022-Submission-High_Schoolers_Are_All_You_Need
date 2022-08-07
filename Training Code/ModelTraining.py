@@ -443,7 +443,7 @@ model = keras.Model(inputs=inputs, outputs=outputs)
 opt = tfa.optimizers.SWA(tf.keras.optimizers.Adam(1e-4), start_averaging=150, average_period=30)
 model.compile(optimizer=opt, loss='MSE', metrics=[])
 
-prs = []
+prs = [0]
 
 
 # In[ ]:
@@ -493,10 +493,10 @@ for i in range(750):
         sr = stats.spearmanr(y_pred, y_valid)[0]
         ls = tf.keras.losses.MSE(y_pred, y_valid).numpy()
         
-        prs.append(pr)
-        
         if pr >= np.max(prs) - 1e-7:
             model.save('../model.h5')
+            
+        prs.append(pr)
         
         print('pearson r:', pr)
         print('spearman r:', sr)
@@ -529,10 +529,10 @@ for i in range(750, 1250):
         sr = stats.spearmanr(y_pred, y_valid)[0]
         ls = tf.keras.losses.MSE(y_pred, y_valid).numpy()
         
-        prs.append(pr)
-        
         if pr >= np.max(prs) - 1e-7:
             model.save('../model.h5')
+            
+        prs.append(pr)
         
         print('pearson r:', pr)
         print('spearman r:', sr)
