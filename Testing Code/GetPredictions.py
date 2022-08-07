@@ -35,7 +35,7 @@ class RevCompConv1D(tf.keras.layers.Conv1D):
             rc_kernel = tf.concat([self.kernel, self.kernel[::-1,:,:][:,::-1,:]], axis=-1)
 
             # convolution 1D
-            outputs = self._convolution_op(inputs, rc_kernel)
+            outputs = self.convolution_op(inputs, rc_kernel)
 
             # unstack to forward and reverse strands
             outputs = tf.unstack(outputs, axis=2)
@@ -357,7 +357,7 @@ model = tf.keras.models.load_model('../model.h5', custom_objects={
     
     
 with h5py.File('../Training Data/compressed_dataset_111.h5', 'r') as hf:
-    x_test = hf['x_test'][:,:111]
+    x_test = hf['x_test'][:,:111,:4]
 
 
 
