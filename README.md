@@ -2,6 +2,9 @@
 High Schoolers Are All You Need Team
 
 
+Please download the final report PDF. There seems to be an issue with viewing it on GitHub.
+
+
 Final model is stored in "submission\_model.h5". Code for loading the model is in "Testing Code/GetPredictions.py"
 Final predictions are stored in "submission\_predictions.txt"
 
